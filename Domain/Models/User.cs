@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Domain.Enums;
 
 namespace Domain.Models
 {
@@ -40,7 +41,7 @@ namespace Domain.Models
 
         [Required(ErrorMessage = "نقش الزامی است")]
         [Display(Name = "نقش")]
-        public string Role { get; set; }
+        public Roles Role { get; set; } = Roles.user;
 
         // Navigation properties
         public virtual Cart Cart { get; set; }
