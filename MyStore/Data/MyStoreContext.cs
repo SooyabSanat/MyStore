@@ -83,5 +83,32 @@ namespace MyStore.Data
                 new Tag { Id = 3, Name = "تخفیف دار", CreatedAt = DateTime.Now, IsDeleted = false }
             );
         }
+        public override int SaveChanges()
+        {
+            UpdateAuditFields();
+
+            return base.SaveChanges();
+        }
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            UpdateAuditFields();
+
+            return await base.SaveChangesAsync();
+        }
+        private void UpdateAuditFields()
+        {
+            var entries = ChangeTracker.Entries()
+                 .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+
+            foreach (var entry in entries)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property(nameof(Base.CreatedAt)).CurrentValue = DateTime.UtcNow;
+                }
+
+                entry.Property(nameof(Base.UpdatedAt)).CurrentValue = DateTime.UtcNow;
+            }
+        }
     }
 }
