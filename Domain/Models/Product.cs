@@ -35,9 +35,14 @@ namespace Domain.Models
         [Display(Name = "وضعیت")]
         public bool IsActive { get; set; }
 
+
         [Display(Name = "دسته بندی")]
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
+        [Display(Name = "تگ ها")]
+        public virtual ICollection<ProductsTags> ProductsTags { get; set; }
+
     }
 }
