@@ -2,7 +2,7 @@
 using Domain.Models;
 using Domain.Enums;
 
-namespace MyStore.Data
+namespace Repository.Data
 {
     public class MyStoreContext : DbContext
     {
@@ -22,15 +22,19 @@ namespace MyStore.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<ProductsTags> ProductsTags { get; set; }
+        public DbSet<Domain.Models.Attribute> Attributes { get; set; }
+        public DbSet<AttributeValues> AttributeValues { get; set; }
+        public DbSet<ProductAttribute> ProductAttributes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.Entity<ProductAttribute>()
+                .HasKey(pa => new { pa.ProductId, pa.AttributeValueId });
             // Configure indexes
             modelBuilder.Entity<Product>()
                 .HasIndex(p => p.Name);
-
+            
             modelBuilder.Entity<Product>()
                 .HasIndex(p => p.CategoryId);
 
@@ -56,9 +60,9 @@ namespace MyStore.Data
 
             // Seed Data
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "لپ تاپ", Description = "انواع لپ تاپ", CreatedAt = DateTime.Now, IsDeleted = false },
-                new Category { Id = 2, Name = "موبایل", Description = "انواع گوشی موبایل", CreatedAt = DateTime.Now, IsDeleted = false },
-                new Category { Id = 3, Name = "تبلت", Description = "انواع تبلت", CreatedAt = DateTime.Now, IsDeleted = false }
+                new Category { Id = 1,Name = "لپ تاپ", Description = "انواع لپ تاپ", CreatedAt = new DateTime(2024, 1, 1), IsDeleted = false },
+                new Category { Id = 2, Name = "موبایل", Description = "انواع گوشی موبایل", CreatedAt = new DateTime(2024, 1, 1), IsDeleted = false },
+                new Category { Id = 3, Name = "تبلت", Description = "انواع تبلت", CreatedAt = new DateTime(2024, 1, 1), IsDeleted = false }
             );
 
             modelBuilder.Entity<User>().HasData(
@@ -66,21 +70,21 @@ namespace MyStore.Data
                 {
                     Id = 1,
                     Email = "admin@mystore.com",
-                    Password = BCrypt.Net.BCrypt.HashPassword("123456"),
+                    Password = "$2a$11$Xo2x3SsNzVZFRJX.sy9ghe/2MOy/j9DgJgc2C5fa3j6fa0nk/7pba",
                     FirstName = "مدیر",
                     LastName = "سیستم",
                     PhoneNumber = "09123456789",
                     Address = "تهران",
                     Role = Roles.admin,
-                    CreatedAt = DateTime.Now,
+                    CreatedAt = new DateTime(2024, 1, 1),
                     IsDeleted = false
                 }
             );
 
             modelBuilder.Entity<Tag>().HasData(
-                new Tag { Id = 1, Name = "پرفروش", CreatedAt = DateTime.Now, IsDeleted = false },
-                new Tag { Id = 2, Name = "جدید", CreatedAt = DateTime.Now, IsDeleted = false },
-                new Tag { Id = 3, Name = "تخفیف دار", CreatedAt = DateTime.Now, IsDeleted = false }
+                new Tag { Id = 1, Name = "پرفروش", CreatedAt = new DateTime(2024, 1, 1), IsDeleted = false },
+                new Tag { Id = 2, Name = "جدید", CreatedAt = new DateTime(2024, 1, 1), IsDeleted = false },
+                new Tag { Id = 3, Name = "تخفیف دار", CreatedAt = new DateTime(2024, 1, 1), IsDeleted = false }
             );
         }
         public override int SaveChanges()

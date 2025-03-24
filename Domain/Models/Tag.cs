@@ -13,7 +13,6 @@ namespace Domain.Models
         [Required(ErrorMessage = "نام تگ الزامی است.")]
         public string Name { get; set; }
 
-        [Display(Name = "محصولات")]
-        public ICollection<Product> Products { get; set; }
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MyStore.Data;
+using Repository.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MyStoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyStoreContext") ?? throw new InvalidOperationException("Connection string 'MyStoreContext' not found.")));
@@ -25,10 +25,14 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+);
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

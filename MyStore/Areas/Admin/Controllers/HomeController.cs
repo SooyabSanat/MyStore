@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MyStore.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class HomeController : Controller
     {
         // GET: HomeController
