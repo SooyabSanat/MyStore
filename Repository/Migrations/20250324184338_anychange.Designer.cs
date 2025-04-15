@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
@@ -11,9 +12,11 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(MyStoreContext))]
-    partial class MyStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20250324184338_anychange")]
+    partial class anychange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +56,7 @@ namespace Repository.Migrations
                     b.ToTable("Attributes");
                 });
 
-            modelBuilder.Entity("Domain.Models.AttributeValue", b =>
+            modelBuilder.Entity("Domain.Models.AttributeValues", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -441,71 +444,6 @@ namespace Repository.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("Domain.Models.ProductVariant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductVariants");
-                });
-
-            modelBuilder.Entity("Domain.Models.ProductVariantAttribute", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AttributeValueId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductVariantId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttributeValueId");
-
-                    b.HasIndex("ProductVariantId");
-
-                    b.ToTable("ProductVariantAttributes");
-                });
-
             modelBuilder.Entity("Domain.Models.ProductsTags", b =>
                 {
                     b.Property<int>("ProductId")
@@ -656,7 +594,7 @@ namespace Repository.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.Models.AttributeValue", b =>
+            modelBuilder.Entity("Domain.Models.AttributeValues", b =>
                 {
                     b.HasOne("Domain.Models.Attribute", "Attribute")
                         .WithMany()
@@ -760,7 +698,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Models.ProductAttribute", b =>
                 {
-                    b.HasOne("Domain.Models.AttributeValue", "AttributeValue")
+                    b.HasOne("Domain.Models.AttributeValues", "AttributeValue")
                         .WithMany()
                         .HasForeignKey("AttributeValueId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -786,36 +724,6 @@ namespace Repository.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Domain.Models.ProductVariant", b =>
-                {
-                    b.HasOne("Domain.Models.Product", "Product")
-                        .WithMany("Variants")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Domain.Models.ProductVariantAttribute", b =>
-                {
-                    b.HasOne("Domain.Models.AttributeValue", "AttributeValue")
-                        .WithMany()
-                        .HasForeignKey("AttributeValueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Models.ProductVariant", "ProductVariant")
-                        .WithMany("VariantAttributes")
-                        .HasForeignKey("ProductVariantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AttributeValue");
-
-                    b.Navigation("ProductVariant");
                 });
 
             modelBuilder.Entity("Domain.Models.ProductsTags", b =>
@@ -859,13 +767,6 @@ namespace Repository.Migrations
                     b.Navigation("ProductImages");
 
                     b.Navigation("ProductsTags");
-
-                    b.Navigation("Variants");
-                });
-
-            modelBuilder.Entity("Domain.Models.ProductVariant", b =>
-                {
-                    b.Navigation("VariantAttributes");
                 });
 
             modelBuilder.Entity("Domain.Models.User", b =>

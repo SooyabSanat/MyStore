@@ -1,0 +1,16 @@
+﻿@using Domain.Models.ViewModels
+@model List<HeaderItemsViewModel>
+
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="@item.Url">@item.Title</a>
+            @if (item.Children.Any())
+            {
+                <partial name="_SubMenu" model="item.Children" />
+            }
+        </li>
+    }
+</ul>

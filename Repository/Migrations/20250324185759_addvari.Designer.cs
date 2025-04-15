@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
@@ -11,9 +12,11 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(MyStoreContext))]
-    partial class MyStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20250324185759_addvari")]
+    partial class addvari
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -471,7 +474,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductVariants");
+                    b.ToTable("ProductVariant");
                 });
 
             modelBuilder.Entity("Domain.Models.ProductVariantAttribute", b =>
@@ -503,7 +506,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("ProductVariantId");
 
-                    b.ToTable("ProductVariantAttributes");
+                    b.ToTable("ProductVariantAttribute");
                 });
 
             modelBuilder.Entity("Domain.Models.ProductsTags", b =>

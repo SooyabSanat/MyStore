@@ -5,8 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Models.Entities;
 
-namespace Domain.Models
+namespace Domain.Models.Relations
 {
     public class ProductAttribute : Base
     {
@@ -21,6 +22,6 @@ namespace Domain.Models
         public Product Product { get; set; }
 
         [Display(Name = "ویژگی")]
-        public AttributeValues AttributeValue { get; set; }
+        public AttributeValue AttributeValue { get; set; }
     }
 }

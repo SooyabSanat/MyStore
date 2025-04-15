@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Models;
+namespace Domain.Models.Entities;
 
 public class Attribute : Base
 {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Models
+namespace Domain.Models.Entities
 {
-    public class AttributeValues : Base
+    public class AttributeValue : Base
     {
         [Required]
         public int AttributeId { get; set; }
@@ -16,6 +16,6 @@ namespace Domain.Models
         [Display(Name = "مقدار")]
         public string Value { get; set; }
 
-        public Domain.Models.Attribute Attribute { get; set; }
+        public Attribute Attribute { get; set; }
     }
 }

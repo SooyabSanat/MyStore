@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using Domain.Enums;
+using Domain.Models.Enums;
 
-namespace Domain.Models
+namespace Domain.Models.Entities
 {
     public class User : Base
     {

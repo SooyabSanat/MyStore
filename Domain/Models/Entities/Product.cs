@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Domain.Models.Relations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Models
+namespace Domain.Models.Entities
 {
     public class Product : Base
     {
@@ -48,6 +49,10 @@ namespace Domain.Models
 
         [Display(Name = "تگ ها")]
         public virtual ICollection<ProductsTags> ProductsTags { get; set; }
+        
+
+        [Display(Name = "ویژگی ها")]
+        public ICollection<ProductVariant> Variants { get; set; } = new List<ProductVariant>();
 
     }
 }

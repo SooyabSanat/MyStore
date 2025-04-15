@@ -1,6 +1,7 @@
+using Domain.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Models
+namespace Domain.Models.Relations
 {
     public class ProductsTags
     {
