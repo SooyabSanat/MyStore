@@ -10,12 +10,11 @@ namespace Domain.Models.Entities
     public class AttributeValue : Base
     {
         [Required]
-        public int AttributeId { get; set; }
-
-        [Required]
         [Display(Name = "مقدار")]
         public string Value { get; set; }
-
+        
+        [Required]
+        public int AttributeId { get; set; }
         public Attribute Attribute { get; set; }
     }
 }

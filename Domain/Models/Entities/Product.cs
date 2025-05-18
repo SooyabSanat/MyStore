@@ -35,24 +35,24 @@ namespace Domain.Models.Entities
         [Range(0, int.MaxValue, ErrorMessage = "موجودی باید بزرگتر از صفر باشد")]
         public int Stock { get; set; }
 
-
-        [Display(Name = "وضعیت")]
-        public bool IsActive { get; set; }
-
-
+        [Required]
         [Display(Name = "دسته بندی")]
         public int CategoryId { get; set; }
-
-
+        
+        [Display(Name = "دسته بندی")]
         public virtual Category Category { get; set; }
 
 
         [Display(Name = "تگ ها")]
-        public virtual ICollection<ProductsTags> ProductsTags { get; set; }
+        public virtual ICollection<ProductsTags> ProductsTags { get; set; } = new  List<ProductsTags>();
         
 
-        [Display(Name = "ویژگی ها")]
+        [Display(Name = "ویژگی های تاثیر گذار بر قیمت")]
         public ICollection<ProductVariant> Variants { get; set; } = new List<ProductVariant>();
+
+
+        [Display(Name = "ویژگی ها")]
+        public ICollection<ProductAttribute> Attributes { get; set; } = new List<ProductAttribute>();
 
     }
 }
